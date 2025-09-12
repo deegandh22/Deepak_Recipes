@@ -4,10 +4,10 @@
 <plist version="1.0">
 <dict>
     <key>Identifier</key>
-    <string>com.github.deegandh22.pkg.AndroidStudio-AppleSilicon</string>
+    <string>com.github.deegandh22.pkg.AndroidStudio</string>
 
     <key>Description</key>
-    <string>Downloads the latest Android Studio DMG for Apple Silicon (arm64) and builds a macOS installer package (.pkg).</string>
+    <string>Downloads the latest Android Studio DMG and builds a macOS installer package (.pkg).</string>
 
     <key>MinimumVersion</key>
     <string>2.3</string>
@@ -15,14 +15,14 @@
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Android Studio (Apple Silicon)</string>
+        <string>Android Studio</string>
         <key>DOWNLOAD_URL</key>
-        <string>https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.9/android-studio-2024.2.1.9-mac_arm.dmg</string>
+        <string>https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.9/android-studio-2024.2.1.9-mac.dmg</string>
     </dict>
 
     <key>Process</key>
     <array>
-        <!-- 1️⃣ Download the Apple-Silicon DMG -->
+        <!-- 1️⃣ Download the DMG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
