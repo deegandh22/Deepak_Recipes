@@ -22,7 +22,7 @@
 
     <key>Process</key>
     <array>
-        <!-- Download the DMG -->
+        <!-- 1️⃣ Download the DMG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -33,13 +33,18 @@
             </dict>
         </dict>
 
-        <!-- Extract version number from the app inside the DMG -->
+        <!-- 2️⃣ Read version from the downloaded DMG -->
         <dict>
             <key>Processor</key>
             <string>AppDmgVersioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>dmg_path</key>
+                <string>%pathname%</string>
+            </dict>
         </dict>
 
-        <!-- Build a .pkg installer from the app -->
+        <!-- 3️⃣ Build a .pkg installer from the app -->
         <dict>
             <key>Processor</key>
             <string>AppPkgCreator</string>
