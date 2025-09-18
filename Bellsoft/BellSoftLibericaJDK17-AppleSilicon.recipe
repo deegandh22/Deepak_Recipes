@@ -6,7 +6,7 @@
     <key>Identifier</key>
     <string>com.github.deegandh22.pkg.BellSoftLibericaJDK17-AppleSilicon</string>
     <key>Description</key>
-    <string>Downloads the BellSoft Liberica JDK 17 DMG for Mac Apple Silicon and builds a macOS installer package (.pkg).</string>
+    <string>Downloads BellSoft Liberica JDK 17 macOS ARM64 PKG, unpacks, and repacks it into a deployable PKG.</string>
     <key>MinimumVersion</key>
     <string>2.3</string>
     <key>Input</key>
@@ -14,11 +14,11 @@
         <key>NAME</key>
         <string>BellSoft Liberica JDK 17</string>
         <key>DOWNLOAD_URL</key>
-        <string>https://download.bell-sw.com/java/17.0.13+8/bellsoft-jdk17.0.13+8-macos-aarch64.dmg</string>
+        <string>https://download.bell-sw.com/java/17.0.16+12/bellsoft-jdk-17.0.16+12-macos-aarch64.pkg</string>
     </dict>
     <key>Process</key>
     <array>
-        <!-- 1️⃣ Download the DMG -->
+        <!-- 1. Download the PKG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -28,22 +28,35 @@
                 <string>%DOWNLOAD_URL%</string>
             </dict>
         </dict>
-        <!-- 2️⃣ Extract Version from DMG -->
+        <!-- 2. Extract the PKG Payload -->
         <dict>
             <key>Processor</key>
-            <string>AppDmgVersioner</string>
+            <string>PkgPayloadUnpacker</string>
             <key>Arguments</key>
             <dict>
-                <key>dmg_path</key>
-                <string>%downloaded_path%</string>
+                <key>pkg_path</key>
+                <string>%RECIPE_CACHE_DIR%/bellsoft-jdk-17.0.16+12-macos-aarch64.pkg</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/payload_root</string>
             </dict>
         </dict>
-        <!-- 3️⃣ Create PKG from mounted DMG -->
+        <!-- 3. Create a new PKG from unpacked root -->
         <dict>
             <key>Processor</key>
-            <string>AppPkgCreator</string>
+            <string>PkgCreator</string>
             <key>Arguments</key>
-            <dict/>
+            <dict>
+                <key>pkgroot</key>
+                <string>%RECIPE_CACHE_DIR%/payload_root</string>
+                <key>output_package</key>
+                <string>%RECIPE_CACHE_DIR%/BellSoftLibericaJDK17-AppleSilicon.pkg</string>
+                <key>identifier</key>
+                <string>com.github.deegandh22.pkg.BellSoftLibericaJDK17-AppleSilicon</string>
+                <key>version</key>
+                <string>17.0.16+12</string>
+                <key>install_location</key>
+                <string>/Library/Java/JavaVirtualMachines/</string>
+            </dict>
         </dict>
     </array>
 </dict>
