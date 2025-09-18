@@ -4,21 +4,21 @@
 <plist version="1.0">
 <dict>
     <key>Identifier</key>
-    <string>com.github.deegandh22.pkg.BellSoftLibericaJDK17-AppleSilicon</string>
+    <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
     <key>Description</key>
-    <string>Downloads BellSoft Liberica JDK 17 macOS ARM64 PKG, unpacks, and repacks it into a deployable PKG.</string>
+    <string>Downloads BellSoft Liberica JDK 21 DMG for macOS ARM64 and packages it into a deployable PKG.</string>
     <key>MinimumVersion</key>
     <string>2.3</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>BellSoft Liberica JDK 17</string>
+        <string>BellSoft Liberica JDK 21</string>
         <key>DOWNLOAD_URL</key>
-        <string>https://download.bell-sw.com/java/17.0.16+12/bellsoft-jdk-17.0.16+12-macos-aarch64.pkg</string>
+        <string>https://download.bell-sw.com/java/21.0.8+12/bellsoft-jdk21.0.8+12-macos-aarch64.dmg</string>
     </dict>
     <key>Process</key>
     <array>
-        <!-- 1. Download the PKG -->
+        <!-- 1. Download DMG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -28,35 +28,20 @@
                 <string>%DOWNLOAD_URL%</string>
             </dict>
         </dict>
-        <!-- 2. Extract the PKG Payload -->
+        <!-- 2. Extract Version -->
         <dict>
             <key>Processor</key>
-            <string>PkgPayloadUnpacker</string>
+            <string>AppDmgVersioner</string>
             <key>Arguments</key>
             <dict>
-                <key>pkg_path</key>
-                <string>%RECIPE_CACHE_DIR%/bellsoft-jdk-17.0.16+12-macos-aarch64.pkg</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/payload_root</string>
+                <key>dmg_path</key>
+                <string>%downloaded_path%</string>
             </dict>
         </dict>
-        <!-- 3. Create a new PKG from unpacked root -->
+        <!-- 3. Package app into installer PKG -->
         <dict>
             <key>Processor</key>
-            <string>PkgCreator</string>
-            <key>Arguments</key>
-            <dict>
-                <key>pkgroot</key>
-                <string>%RECIPE_CACHE_DIR%/payload_root</string>
-                <key>output_package</key>
-                <string>%RECIPE_CACHE_DIR%/BellSoftLibericaJDK17-AppleSilicon.pkg</string>
-                <key>identifier</key>
-                <string>com.github.deegandh22.pkg.BellSoftLibericaJDK17-AppleSilicon</string>
-                <key>version</key>
-                <string>17.0.16+12</string>
-                <key>install_location</key>
-                <string>/Library/Java/JavaVirtualMachines/</string>
-            </dict>
+            <string>AppPkgCreator</string>
         </dict>
     </array>
 </dict>
