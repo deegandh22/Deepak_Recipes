@@ -42,22 +42,36 @@
 </dict>
 
         <dict>
-            <key>Processor</key>
-            <string>PkgCreator</string>
-            <key>Arguments</key>
+    <key>Processor</key>
+    <string>PkgCreator</string>
+    <key>Arguments</key>
+    <dict>
+        <key>pkgroot</key>
+        <string>%RECIPE_CACHE_DIR%/payload_root</string>
+        <key>output_package</key>
+        <string>%RECIPE_CACHE_DIR%/BellSoftLibericaJDK21-AppleSilicon.pkg</string>
+        <key>identifier</key>
+        <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
+        <key>version</key>
+        <string>21.0.8+12</string>
+        <key>install_location</key>
+        <string>/Library/Java/JavaVirtualMachines/</string>
+        <key>pkg_request</key>
+        <dict>
+            <key>scripts</key>
+            <dict/>
+            <key>package</key>
             <dict>
-                <key>pkgroot</key>
-                <string>%RECIPE_CACHE_DIR%/payload_root</string>
-                <key>output_package</key>
-                <string>%RECIPE_CACHE_DIR%/BellSoftLibericaJDK21-AppleSilicon.pkg</string>
-                <key>identifier</key>
-                <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
+                <key>scripts</key>
+                <dict/>
                 <key>version</key>
                 <string>21.0.8+12</string>
-                <key>install_location</key>
-                <string>/Library/Java/JavaVirtualMachines/</string>
+                <key>identifier</key>
+                <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
             </dict>
         </dict>
+    </dict>
+</dict>
     </array>
 </dict>
 </plist>
