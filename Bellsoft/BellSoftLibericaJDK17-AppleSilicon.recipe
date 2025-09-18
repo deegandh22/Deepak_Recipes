@@ -6,7 +6,7 @@
     <key>Identifier</key>
     <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
     <key>Description</key>
-    <string>Downloads BellSoft Liberica JDK 21 DMG for macOS ARM64 and packages it into a deployable PKG.</string>
+    <string>Downloads BellSoft Liberica JDK 21 PKG for macOS ARM64, unpacks payload, and repacks it into deployable PKG.</string>
     <key>MinimumVersion</key>
     <string>2.3</string>
     <key>Input</key>
@@ -14,11 +14,10 @@
         <key>NAME</key>
         <string>BellSoft Liberica JDK 21</string>
         <key>DOWNLOAD_URL</key>
-        <string>https://download.bell-sw.com/java/21.0.8+12/bellsoft-jdk21.0.8+12-macos-aarch64.dmg</string>
+        <string>https://download.bell-sw.com/java/21.0.8+12/bellsoft-jdk21.0.8+12-macos-aarch64.pkg</string>
     </dict>
     <key>Process</key>
     <array>
-        <!-- 1. Download DMG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -28,20 +27,33 @@
                 <string>%DOWNLOAD_URL%</string>
             </dict>
         </dict>
-        <!-- 2. Extract Version -->
         <dict>
             <key>Processor</key>
-            <string>AppDmgVersioner</string>
+            <string>PkgPayloadUnpacker</string>
             <key>Arguments</key>
             <dict>
-                <key>dmg_path</key>
-                <string>%downloaded_path%</string>
+                <key>pkg_path</key>
+                <string>%RECIPE_CACHE_DIR%/bellsoft-jdk21.0.8+12-macos-aarch64.pkg</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/payload_root</string>
             </dict>
         </dict>
-        <!-- 3. Package app into installer PKG -->
         <dict>
             <key>Processor</key>
-            <string>AppPkgCreator</string>
+            <string>PkgCreator</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkgroot</key>
+                <string>%RECIPE_CACHE_DIR%/payload_root</string>
+                <key>output_package</key>
+                <string>%RECIPE_CACHE_DIR%/BellSoftLibericaJDK21-AppleSilicon.pkg</string>
+                <key>identifier</key>
+                <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
+                <key>version</key>
+                <string>21.0.8+12</string>
+                <key>install_location</key>
+                <string>/Library/Java/JavaVirtualMachines/</string>
+            </dict>
         </dict>
     </array>
 </dict>
