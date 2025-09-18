@@ -2,35 +2,44 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Description</key>
-    <string>Uses parent pkg recipe to download latest GoogleChrome and import it into the JSS.</string>
     <key>Identifier</key>
-    <string>com.github.autopkg.pkg.googlechrome</string>
+    <string>com.github.deegandh22.pkg.BellSoftLibericaJDK21-AppleSilicon</string>
+    <key>Description</key>
+    <string>Downloads BellSoft Liberica JDK 21 macOS ARM64 PKG and copies it to desired location.</string>
+    <key>MinimumVersion</key>
+    <string>2.3</string>
     <key>Input</key>
     <dict>
-        <key>CATEGORY</key>
-        <string>Applications</string>
         <key>NAME</key>
-        <string>GoogleChrome</string>
+        <string>BellSoft Liberica JDK 21</string>
+        <key>DOWNLOAD_URL</key>
+        <string>https://download.bell-sw.com/java/21.0.8+12/bellsoft-jdk21.0.8+12-macos-aarch64.pkg</string>
+        <key>DESTINATION_PATH</key>
+        <string>/Users/username/Downloads/BellSoftLibericaJDK21.pkg</string>
     </dict>
-    <key>MinimumVersion</key>
-    <string>0.2.0</string>
-    <key>ParentRecipe</key>
-    <string>com.github.autopkg.pkg.GoogleChrome</string>
     <key>Process</key>
     <array>
+        <!-- Step 1: Download the PKG -->
         <dict>
+            <key>Processor</key>
+            <string>URLDownloader</string>
             <key>Arguments</key>
             <dict>
-                <key>category</key>
-                <string>%CATEGORY%</string>
-                <key>prod_name</key>
-                <string>%NAME%</string>
-                <key>pkg_path</key>
-                <string>%pkg_path%</string>
+                <key>url</key>
+                <string>%DOWNLOAD_URL%</string>
             </dict>
+        </dict>
+        <!-- Step 2: Copy PKG from cache to DESTINATION_PATH -->
+        <dict>
             <key>Processor</key>
-            <string>com.github.grahampugh.jamf-upload.processors/JamfPackageUploader</string>
+            <string>FileMover</string>
+            <key>Arguments</key>
+            <dict>
+                <key>source_path</key>
+                <string>%RECIPE_CACHE_DIR%/bellsoft-jdk21.0.8+12-macos-aarch64.pkg</string>
+                <key>destination_path</key>
+                <string>%DESTINATION_PATH%</string>
+            </dict>
         </dict>
     </array>
 </dict>
