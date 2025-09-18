@@ -6,7 +6,7 @@
     <key>Identifier</key>
     <string>com.github.deegandh22.pkg.BellSoftLibericaJDK17-AppleSilicon</string>
     <key>Description</key>
-    <string>Downloads the BellSoft Liberica JDK 17 DMG for Mac Apple Silicon and builds a macOS installer package (.pkg).</string>
+    <string>Downloads BellSoft Liberica JDK 17 PKG for Mac Apple Silicon and installs it</string>
     <key>MinimumVersion</key>
     <string>2.3</string>
     <key>Input</key>
@@ -18,7 +18,7 @@
     </dict>
     <key>Process</key>
     <array>
-        <!-- 1️⃣ Download the PKG -->
+        <!-- Download the PKG -->
         <dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -28,8 +28,7 @@
                 <string>%DOWNLOAD_URL%</string>
             </dict>
         </dict>
-        <!-- 2️⃣ (Optional) Extract version if using DMG, skipped here because PKG version is known -->
-        <!-- 3️⃣ Install the PKG -->
+        <!-- Install the PKG -->
         <dict>
             <key>Processor</key>
             <string>PkgNetInstaller</string>
