@@ -4,7 +4,7 @@
 <plist version="1.0">
 <dict>
     <key>Identifier</key>
-    <string>com.github.deegandh22.pkg.AndroidStudio</string>
+    <string>com.github.deegandh22.pkg.AndroidStudio-AppleSilicon</string>
 
     <key>Description</key>
     <string>Downloads the latest Android Studio DMG and builds a macOS installer package (.pkg).</string>
